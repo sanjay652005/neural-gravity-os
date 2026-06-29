@@ -220,3 +220,12 @@ canvas {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── Mobile horizontal scroll — hide scrollbar visually ──────────────── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

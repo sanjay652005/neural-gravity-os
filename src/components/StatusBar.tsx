@@ -290,15 +290,22 @@ export default function StatusBar() {
           <span className="text-[9px] font-mono text-white/25">v2.0</span>
         </div>
 
-        <div className="w-px h-3 bg-white/08" />
+        {/* Separator + Gravity Engine — hidden on mobile, shown on desktop */}
+        <div className="hidden md:flex items-center gap-4">
+          <div className="w-px h-3 bg-white/08" />
+          <GravityEngineStatus />
+          <LoadingIndicator active={isLoading} />
+        </div>
 
-        <GravityEngineStatus />
-
-        <LoadingIndicator active={isLoading} />
+        {/* Mobile-only: compact gravity pulse dot */}
+        <div className="flex md:hidden items-center gap-1.5">
+          <div className="w-px h-3 bg-white/08" />
+          <GravityEngineStatus />
+        </div>
       </div>
 
-      {/* Center — current section + gravity zone state */}
-      <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+      {/* Center — current section + gravity zone state (desktop only) */}
+      <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-2">
         <AnimatePresence mode="wait">
           <motion.span
             key={currentSection}
@@ -314,8 +321,8 @@ export default function StatusBar() {
         <ZoneStateIndicator />
       </div>
 
-      {/* Right — fps, services, sound, clock */}
-      <div className="flex items-center gap-4">
+      {/* Right — fps, services, sound, clock (desktop only) */}
+      <div className="hidden md:flex items-center gap-4">
         {/* FPS */}
         <span className="text-[9px] font-mono text-white/20 tabular-nums hidden sm:block">
           {fps}<span className="text-white/12">fps</span>

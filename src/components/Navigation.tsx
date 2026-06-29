@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, useScroll } from 'framer-motion'
+import { motion, AnimatePresence, useScroll } from 'framer-motion'
 import { NAV_ITEMS, PERSONAL } from '@/constants'
 import MagneticElement from '@/components/MagneticElement'
 import { EASE } from '@/animations/variants'
@@ -27,14 +27,15 @@ export default function Navigation({ commandCenter }: NavigationProps) {
   return (
     <>
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-50 px-6 py-4"
+        className="fixed top-0 left-0 right-0 z-50 px-3 md:px-6 py-3 md:py-4"
         aria-label="Primary navigation"
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15, duration: 0.6, ease: EASE }}
+        style={{ marginTop: 28 }}
       >
         <div
-          className="max-w-6xl mx-auto flex items-center justify-between rounded-2xl px-6 py-3 transition-all duration-500"
+          className="max-w-6xl mx-auto flex items-center justify-between rounded-2xl px-4 md:px-6 py-2.5 md:py-3 transition-all duration-500"
           style={{
             background: scrolled ? 'rgba(9, 9, 9, 0.9)' : 'transparent',
             backdropFilter: scrolled ? 'blur(20px)' : 'none',
@@ -43,14 +44,14 @@ export default function Navigation({ commandCenter }: NavigationProps) {
         >
           {/* Logo */}
           <motion.button
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-2.5 group flex-shrink-0"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             whileHover={{ scale: 1.02 }}
             aria-label="Scroll to top"
           >
-            <div className="relative w-7 h-7">
+            <div className="relative w-6 h-6 md:w-7 md:h-7">
               <div
-                className="w-7 h-7 rounded-full"
+                className="w-6 h-6 md:w-7 md:h-7 rounded-full"
                 style={{
                   background: 'radial-gradient(circle at 35% 35%, #FFE082, #FFD54F)',
                   boxShadow: '0 0 10px rgba(255,213,79,0.5)',
@@ -61,12 +62,18 @@ export default function Navigation({ commandCenter }: NavigationProps) {
                 style={{ boxShadow: '0 0 20px rgba(255,213,79,0.8)' }}
               />
             </div>
-            <span className="text-sm font-semibold text-white tracking-wide">
-              {PERSONAL.name}
-            </span>
+            <div className="flex flex-col items-start leading-none gap-0.5">
+              <span className="text-xs md:text-sm font-semibold text-white tracking-wide">
+                {PERSONAL.name}
+              </span>
+              {/* Version sub-label — mobile only, gives the OS identity below the name */}
+              <span className="text-[8px] font-mono text-white/25 tracking-widest md:hidden">
+                NGOS v2.0
+              </span>
+            </div>
           </motion.button>
 
-          {/* Desktop nav */}
+          {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-8">
             {NAV_ITEMS.map((item) => (
               <motion.button
@@ -80,9 +87,8 @@ export default function Navigation({ commandCenter }: NavigationProps) {
             ))}
           </div>
 
-          {/* CTA + Command Center trigger */}
+          {/* Desktop CTA + Command Center */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Command Center trigger (rendered by App) */}
             {commandCenter}
 
             <MagneticElement strength={0.45}>
@@ -98,59 +104,135 @@ export default function Navigation({ commandCenter }: NavigationProps) {
             </MagneticElement>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden flex flex-col gap-1.5 p-1"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
-            <motion.span
-              className="w-5 h-px bg-white block"
-              animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 5 : 0 }}
-            />
-            <motion.span
-              className="w-5 h-px bg-white block"
-              animate={{ opacity: mobileOpen ? 0 : 1 }}
-            />
-            <motion.span
-              className="w-5 h-px bg-white block"
-              animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -5 : 0 }}
-            />
-          </button>
+          {/* Mobile right side — gravity status pill + hamburger */}
+          <div className="flex md:hidden items-center gap-3">
+
+            {/* Gravity Engine Status Pill — identity anchor on mobile */}
+            <div
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full"
+              style={{
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.07)',
+              }}
+            >
+              <motion.div
+                className="w-1 h-1 rounded-full bg-emerald-400 flex-shrink-0"
+                animate={{ opacity: [1, 0.3, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <span
+                className="text-[8px] font-mono tracking-wider whitespace-nowrap"
+                style={{ color: 'rgba(74,222,128,0.6)' }}
+              >
+                GE ONLINE
+              </span>
+            </div>
+
+            {/* Hamburger */}
+            <button
+              className="flex flex-col gap-1.5 p-1 flex-shrink-0"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              <motion.span
+                className="w-5 h-px bg-white block"
+                animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 5 : 0 }}
+              />
+              <motion.span
+                className="w-5 h-px bg-white block"
+                animate={{ opacity: mobileOpen ? 0 : 1 }}
+              />
+              <motion.span
+                className="w-5 h-px bg-white block"
+                animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -5 : 0 }}
+              />
+            </button>
+          </div>
         </div>
       </motion.nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu drawer */}
       <motion.div
         className="fixed inset-0 z-40 md:hidden"
         initial={false}
         animate={{ opacity: mobileOpen ? 1 : 0, pointerEvents: mobileOpen ? 'auto' : 'none' }}
         transition={{ duration: 0.25, ease: EASE }}
       >
-        <div className="absolute inset-0 bg-[#090909]/95 backdrop-blur-2xl" onClick={() => setMobileOpen(false)} />
+        <div
+          className="absolute inset-0 bg-[#090909]/95 backdrop-blur-2xl"
+          onClick={() => setMobileOpen(false)}
+        />
+
         <motion.div
-          className="absolute top-20 left-6 right-6 glass rounded-2xl p-6 border border-white/08"
+          className="absolute left-4 right-4 glass rounded-2xl p-6 border border-white/08"
+          style={{ top: 96 }}
           initial={{ y: -16, opacity: 0, scale: 0.98 }}
-          animate={{ y: mobileOpen ? 0 : -16, opacity: mobileOpen ? 1 : 0, scale: mobileOpen ? 1 : 0.98 }}
+          animate={{
+            y: mobileOpen ? 0 : -16,
+            opacity: mobileOpen ? 1 : 0,
+            scale: mobileOpen ? 1 : 0.98,
+          }}
           transition={{ duration: 0.35, ease: EASE }}
         >
-          <div className="flex flex-col gap-4">
-            {NAV_ITEMS.map((item) => (
-              <button
+          {/* Drawer header */}
+          <div className="flex items-center justify-between mb-5 pb-4 border-b border-white/06">
+            <span className="text-[9px] font-mono text-white/25 tracking-[0.2em] uppercase">
+              Navigation
+            </span>
+            <div className="flex items-center gap-1.5">
+              <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[9px] font-mono text-emerald-400/60 tracking-wider">
+                SYSTEM ONLINE
+              </span>
+            </div>
+          </div>
+
+          {/* Nav links */}
+          <div className="flex flex-col gap-1">
+            {NAV_ITEMS.map((item, i) => (
+              <motion.button
                 key={item.label}
                 onClick={() => handleNavClick(item.href)}
-                className="text-left text-lg font-medium text-white/70 hover:text-white transition-colors py-2 border-b border-white/05 last:border-0"
+                className="flex items-center justify-between text-left py-3 px-2 rounded-xl hover:bg-white/04 transition-colors group"
+                initial={{ opacity: 0, x: -8 }}
+                animate={{
+                  opacity: mobileOpen ? 1 : 0,
+                  x: mobileOpen ? 0 : -8,
+                }}
+                transition={{
+                  delay: mobileOpen ? i * 0.05 + 0.1 : 0,
+                  duration: 0.3,
+                  ease: EASE,
+                }}
               >
-                {item.label}
-              </button>
+                <span className="text-base font-medium text-white/70 group-hover:text-white transition-colors">
+                  {item.label}
+                </span>
+                <span className="text-white/15 group-hover:text-[#FFD54F]/40 transition-colors text-sm">
+                  →
+                </span>
+              </motion.button>
             ))}
-            <a
-              href="mailto:sanjay.pdev@gmail.com"
-              className="mt-2 text-center text-sm font-mono text-[#FFD54F] border border-[#FFD54F]/30 px-4 py-3 rounded-full hover:bg-[#FFD54F]/10 transition-all"
-            >
-              Hire Me
-            </a>
           </div>
+
+          {/* Hire Me CTA */}
+          <motion.a
+            href="mailto:sanjay.pdev@gmail.com"
+            className="mt-5 flex items-center justify-center gap-2 text-sm font-mono text-[#FFD54F] border border-[#FFD54F]/30 px-4 py-3.5 rounded-full hover:bg-[#FFD54F]/10 transition-all"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{
+              opacity: mobileOpen ? 1 : 0,
+              y: mobileOpen ? 0 : 8,
+            }}
+            transition={{
+              delay: mobileOpen ? 0.35 : 0,
+              duration: 0.3,
+              ease: EASE,
+            }}
+          >
+            <span>Hire Me</span>
+            <span className="text-[#FFD54F]/50">↗</span>
+          </motion.a>
         </motion.div>
       </motion.div>
     </>
