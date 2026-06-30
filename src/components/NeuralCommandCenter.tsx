@@ -274,34 +274,34 @@ function buildCommands(ctx: CommandContext): Command[] {
       keywords: ['resume', 'open', 'view', 'pdf'],
       action: () => ctx.openURL('/resume.pdf'),
     },
-    {
-      id: 'dev-github',
-      label: 'Open GitHub',
-      description: 'github.com/sanjay-p',
-      category: 'developer',
-      icon: <Github size={15} />,
-      keywords: ['github', 'git', 'code', 'repos', 'source'],
-      action: () => ctx.openURL('https://github.com/sanjay-p'),
-    },
-    {
-      id: 'dev-linkedin',
-      label: 'Open LinkedIn',
-      description: 'linkedin.com/in/sanjay-p-90999a307',
-      category: 'developer',
-      icon: <Linkedin size={15} />,
-      keywords: ['linkedin', 'connect', 'network', 'profile'],
-      action: () =>
-        ctx.openURL('https://linkedin.com/in/sanjay-p-90999a307'),
-    },
-    {
-      id: 'dev-email',
-      label: 'Send Email',
-      description: 'sanjay.pdev@gmail.com',
-      category: 'developer',
-      icon: <Mail size={15} />,
-      keywords: ['email', 'mail', 'contact', 'send', 'hire'],
-      action: () => ctx.openURL('mailto:sanjay.pdev@gmail.com'),
-    },
+   {
+  id: 'dev-github',
+  label: 'Open GitHub',
+  description: 'github.com/sanjay652005',
+  category: 'developer',
+  icon: <Github size={15} />,
+  keywords: ['github', 'git', 'code', 'repos', 'source'],
+  action: () => ctx.openURL('https://github.com/sanjay652005'),
+},
+{
+  id: 'dev-linkedin',
+  label: 'Open LinkedIn',
+  description: 'linkedin.com/in/sanjayp-dev',
+  category: 'developer',
+  icon: <Linkedin size={15} />,
+  keywords: ['linkedin', 'connect', 'network', 'profile'],
+  action: () =>
+    ctx.openURL('https://www.linkedin.com/in/sanjayp-dev'),
+},
+{
+  id: 'dev-email',
+  label: 'Send Email',
+  description: 'sanjay20050605@gmail.com',
+  category: 'developer',
+  icon: <Mail size={15} />,
+  keywords: ['email', 'mail', 'contact', 'send', 'hire'],
+  action: () => ctx.openURL('mailto:sanjay20050605@gmail.com'),
+},
 
     // ── Hidden / Easter egg commands ──────────────────────────────────────
     {

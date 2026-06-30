@@ -4,9 +4,9 @@ export const PERSONAL = {
   tagline: 'Building scalable systems powered by intelligent architecture.',
   description:
     'Final-year B.Tech IT graduate (Anna University, 2026) who built and deployed 3 full-stack MERN applications featuring AI integrations (Groq/Llama 3.1), real-time Socket.IO communication, and scalable REST APIs.',
-  email: 'sanjay.pdev@gmail.com',
-  linkedin: 'https://linkedin.com/in/sanjay-p-90999a307',
-  github: 'https://github.com/sanjay-p',
+  email: 'sanjay20050605@gmail.com',
+linkedin: 'https://www.linkedin.com/in/sanjayp-dev',
+github: 'https://github.com/sanjay652005',
   portfolio: 'https://sanjay-dev-portfolio.netlify.app',
   location: 'Kanchipuram, Tamil Nadu',
   cgpa: '7.6',

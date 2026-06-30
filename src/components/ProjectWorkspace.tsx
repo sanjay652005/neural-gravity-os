@@ -655,7 +655,7 @@ function TabRepository({ project }: { project: Project }) {
         </div>
         <div className="flex flex-col flex-1">
           <span className="text-sm font-semibold" style={{ color: project.color }}>View Source Code</span>
-          <span className="text-[11px] font-mono text-white/30">github.com/sanjay-p · {project.title}</span>
+          <span className="text-[11px] font-mono text-white/30">github.com/sanjay652005 · {project.title}</span>
         </div>
         <ExternalLink size={13} style={{ color: `${project.color}70` }}
           className="opacity-0 group-hover:opacity-100 transition-opacity" />

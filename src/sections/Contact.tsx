@@ -6,8 +6,8 @@ import { gravityReveal, gravityRevealLeft, gravityRevealRight, EASE } from '@/an
 
 const CONTACT_LINKS = [
   { icon: Mail,     label: 'Email',    value: PERSONAL.email,                     href: `mailto:${PERSONAL.email}`, color: '#FFD54F' },
-  { icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/sanjay-p-90999a307', href: PERSONAL.linkedin,          color: '#64B5F6' },
-  { icon: Github,   label: 'GitHub',   value: 'github.com/sanjay-p',               href: PERSONAL.github,            color: '#FFFFFF' },
+  { icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/sanjayp-dev',       href: PERSONAL.linkedin,          color: '#64B5F6' },
+  { icon: Github,   label: 'GitHub',   value: 'github.com/sanjay652005',           href: PERSONAL.github,            color: '#FFFFFF' },
   { icon: FileDown, label: 'Resume',   value: 'Download PDF',                      href: '/resume.pdf',              color: '#81C784' },
 ]
 

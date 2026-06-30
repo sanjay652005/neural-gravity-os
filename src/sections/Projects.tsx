@@ -253,7 +253,7 @@ export default function Projects() {
           transition={{ delay: 0.45, duration: 0.5, ease: EASE }}
         >
           <a
-            href="https://github.com/sanjay-p"
+            href="https://github.com/sanjay652005"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 text-sm font-medium text-white/40 hover:text-white/70 transition-colors group"
